@@ -53,9 +53,12 @@ kubeadm init \
   --node-name master
 
 # Prepare kubeconfig file for downloading
-cp /etc/kubernetes/admin.conf /home/ubuntu
-chown ubuntu:ubuntu /home/ubuntu/admin.conf 
-kubectl --kubeconfig /home/ubuntu/admin.conf config set-cluster kubernetes --server "https://${master_public_ip}:6443"
+cp /etc/kubernetes/admin.conf /home/ubuntu/admin.conf
+chown ubuntu:ubuntu /home/ubuntu/admin.conf
+chmod 600 /home/ubuntu/admin.conf
+ 
+kubectl --kubeconfig /home/ubuntu/admin.conf config set-cluster kubernetes \
+  --server "https://${master_public_ip}:6443"
 %{~ endif ~}
 
 %{~ if node == "worker" ~}
