@@ -94,7 +94,7 @@ resource "aws_security_group" "ingress_ssh" {
 
 # EIP for master node because it must know its public IP during initialisation
 resource "aws_eip" "master" {
-  vpc  = true
+#  vpc  = true
   tags = local.tags
 }
 
